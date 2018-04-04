@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def trap_fuzzy_interface(a, set_points):
+def trap_membership_degree(a, set_points):
     """
     Calculates membership degree of input according to trapezoidal set characterized by an array
     :param a: number to evaluate in fuzzy set
@@ -45,7 +45,7 @@ def trap_fuzzy_fun(u, set_points):
     :param set_points: size 4 array vector with trapezoid definitions
     :return: array vector with membership degrees vales for every input in u
     """
-    return np.array([trap_fuzzy_interface(i, set_points) for i in u])
+    return np.array([trap_membership_degree(i, set_points) for i in u])
 
 
 def intersection(a, b):
@@ -98,6 +98,8 @@ for i in sets:
 
 plt.xlabel('Input value')
 plt.ylabel('Membership degree')
+plt.title('Membership functions')
+plt.legend(['A', 'B', 'C', 'D'])
 plt.show()
 
 # 1
@@ -106,6 +108,7 @@ plt.subplot(2, 2, 1)
 plt.xlabel('Input value')
 plt.ylabel('Membership degree')
 plt.plot(x, op1)
+plt.title('Operación 1')
 
 
 # 2
@@ -114,6 +117,7 @@ plt.subplot(2, 2, 2)
 plt.xlabel('Input value')
 plt.ylabel('Membership degree')
 plt.plot(x, op2)
+plt.title('Operación 2')
 
 # 3
 op3 = intersection(compliment(S[3]), union(S[1], S[0]))
@@ -121,6 +125,7 @@ plt.subplot(2, 2, 3)
 plt.xlabel('Input value')
 plt.ylabel('Membership degree')
 plt.plot(x, op3)
+plt.title('Operación 3')
 
 # 4
 op4 = compliment(union(S[0], S[1]))
@@ -128,5 +133,10 @@ plt.subplot(2, 2, 4)
 plt.xlabel('Input value')
 plt.ylabel('Membership degree')
 plt.plot(x, op4)
+plt.title('Operación 4')
 
 plt.show()
+
+
+# Verify convexity
+
