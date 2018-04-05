@@ -96,6 +96,7 @@ for i in sets:
     plt.plot(x, s)
     S.append(s)
 
+
 plt.xlabel('Input value')
 plt.ylabel('Membership degree')
 plt.title('Membership functions')
@@ -136,7 +137,3 @@ plt.plot(x, op4)
 plt.title('Operación 4')
 
 plt.show()
-
-
-# Verify convexity
-
