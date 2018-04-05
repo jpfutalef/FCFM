@@ -23,30 +23,30 @@ def trap_membership_degree(a, set_points):
     For example [2,2,3,4], as both first and second values are 2, the membership degree of 2 is 1.
     """
     if len(set_points) > 4 or len(set_points) < 4:
-        "Argument given is not a size 4 array."
+        """Argument given is not a size 4 array."""
         raise NameError('nonTrapezoidalSet')
     else:
         if a < set_points[0] or a > set_points[3]:
-            "Outside trapezoid case"
+            """Outside trapezoid case"""
             return 0
         elif a < set_points[1]:
-            "Left support case"
+            """Left support case"""
             d = set_points[1] - set_points[0]
             if d == 0:
-                "Both values are equal"
+                """Both values are equal"""
                 return 1
             else:
                 return (a - set_points[0]) / d
         elif a > set_points[2]:
-            "Right support case"
+            """Right support case"""
             d = set_points[2] - set_points[3]
             if d == 0:
-                "both values are equal"
+                """both values are equal"""
                 return 1
             else:
                 return (a - set_points[3]) / d
         else:
-            "Value is in core"
+            """Value is in core"""
             return 1
 
 
