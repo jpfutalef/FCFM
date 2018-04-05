@@ -85,7 +85,7 @@ D = np.array([.1, .2, .3, .8])
 E = np.array([.4, .6, 1, 1])
 
 # Create sets
-x = np.linspace(-1, 1, 200)
+x = np.linspace(-1, 1, 41)
 sets = [A, B, C, D, E]
 S = []
 for i in sets:
@@ -143,3 +143,9 @@ plt.tight_layout()
 plt.savefig('operationResults.png')
 #plt.show()
 plt.close()
+
+# Export to csv
+setsCSV = np.transpose(np.array([x, S[0], S[1], S[2], S[3], S[4]]))
+operationsCSV = np.transpose(np.array([x, op1, op2, op3, op4]))
+np.savetxt('valuesSets.csv', setsCSV, delimiter=" ", fmt='%1.3f')
+np.savetxt("valuesOperations.csv", operationsCSV, delimiter=" ", fmt='%1.3f')
