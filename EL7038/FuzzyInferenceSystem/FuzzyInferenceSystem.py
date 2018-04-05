@@ -15,29 +15,38 @@ import matplotlib.pyplot as plt
 def trap_membership_degree(a, set_points):
     """
     Calculates membership degree of input according to trapezoidal function
-    characterized by a size 4 array
+    characterized by a size 4 array.
     :param a: number to evaluate in fuzzy set
     :param set_points: size 4 array with trapezoid definitions
     :return: membership degree of a
+    Note: If points representing start and end of same support are equal, the membership degree is assumed to be one.
+    For example [2,2,3,4], as both first and second values are 2, the membership degree of 2 is 1.
     """
     if len(set_points) > 4 or len(set_points) < 4:
+        "Argument given is not a size 4 array."
         raise NameError('nonTrapezoidalSet')
     else:
         if a < set_points[0] or a > set_points[3]:
+            "Outside trapezoid case"
             return 0
         elif a < set_points[1]:
+            "Left support case"
             d = set_points[1] - set_points[0]
             if d == 0:
+                "Both values are equal"
                 return 1
             else:
                 return (a - set_points[0]) / d
         elif a > set_points[2]:
+            "Right support case"
             d = set_points[2] - set_points[3]
             if d == 0:
+                "both values are equal"
                 return 1
             else:
                 return (a - set_points[3]) / d
         else:
+            "Value is in core"
             return 1
 
 
