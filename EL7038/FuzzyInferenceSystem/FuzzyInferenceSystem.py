@@ -103,7 +103,8 @@ plt.title('Membership functions')
 plt.legend(['A', 'B', 'C', 'D'])
 plt.savefig('membershipFuns.png')
 #plt.show()
-plt.clear()
+plt.close()
+
 
 # 1
 op1 = union(S[3], intersection(S[0], S[2]))
@@ -138,6 +139,7 @@ plt.ylabel('Membership degree')
 plt.plot(x, op4)
 plt.title('Operación 4')
 
+plt.tight_layout()
 plt.savefig('operationResults.png')
 #plt.show()
-plt.clear()
+plt.close()
