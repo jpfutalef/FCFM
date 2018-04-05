@@ -1,6 +1,8 @@
 """
-This program allows treatment of fuzzy sets, including computation of membership,
+This program implements a fuzzy interface, including computation of membership,
 fuzzy operations and plotting of membership sets.
+
+It's necessary to count with numpy and matplotlib libraries.
 """
 
 __author__ = 'Juan Pablo Futalef'
@@ -12,7 +14,8 @@ import matplotlib.pyplot as plt
 
 def trap_membership_degree(a, set_points):
     """
-    Calculates membership degree of input according to trapezoidal set characterized by an array
+    Calculates membership degree of input according to trapezoidal function
+    characterized by a size 4 array
     :param a: number to evaluate in fuzzy set
     :param set_points: size 4 array with trapezoid definitions
     :return: membership degree of a
@@ -40,7 +43,7 @@ def trap_membership_degree(a, set_points):
 
 def trap_fuzzy_fun(u, set_points):
     """
-    Allows to calculate membership function according to input array and trapezoidal size 4 array
+    Allows to calculate membership values of input respect to trapezoidal function
     :param u: input vector
     :param set_points: size 4 array vector with trapezoid definitions
     :return: array vector with membership degrees vales for every input in u
@@ -77,26 +80,29 @@ def compliment(a):
     return np.array([1 - x for x in a])
 
 
-# Define trapezoidal sets by core and support
+# Define trapezoidal functions by size 4 arrays
 A = np.array([-1.0, -1.0, -.9, -.2])
 B = np.array([-.6, -.5, .0, .1])
 C = np.array([-.3, .0, .2, .3])
 D = np.array([.1, .2, .3, .8])
 E = np.array([.4, .6, 1, 1])
 
-# Create sets
+# Define X axis values
 x = np.linspace(-1, 1, 41)
+
+# Create array containing sets definitions (size 4 arrays) an iterate trough them
 sets = [A, B, C, D, E]
 S = []
 for i in sets:
     """
     Appends every fuzzy membership set in S. It gives S[0] as A set, S[1] as B set, and so on.
+    Also, add graphs to plot object.
     """
     s = trap_fuzzy_fun(x, i)
-    plt.plot(x, s)
     S.append(s)
+    plt.plot(x, s)
 
-
+# Plot membership functions and save result to file
 plt.xlabel('Input value')
 plt.ylabel('Membership degree')
 plt.title('Membership functions')
@@ -106,7 +112,7 @@ plt.savefig('membershipFuns.png')
 plt.close()
 
 
-# 1
+# Operacion 1
 op1 = union(S[3], intersection(S[0], S[2]))
 plt.subplot(2, 2, 1)
 plt.xlabel('Input value')
@@ -115,7 +121,7 @@ plt.plot(x, op1)
 plt.title('Operación 1')
 
 
-# 2
+# Operacion 2
 op2 = intersection(compliment(intersection(S[0], S[1])), intersection(S[3], S[4]))
 plt.subplot(2, 2, 2)
 plt.xlabel('Input value')
@@ -123,7 +129,7 @@ plt.ylabel('Membership degree')
 plt.plot(x, op2)
 plt.title('Operación 2')
 
-# 3
+# Operacion 3
 op3 = intersection(compliment(S[3]), union(S[1], S[0]))
 plt.subplot(2, 2, 3)
 plt.xlabel('Input value')
@@ -131,7 +137,7 @@ plt.ylabel('Membership degree')
 plt.plot(x, op3)
 plt.title('Operación 3')
 
-# 4
+# Operacion 4
 op4 = compliment(union(S[0], S[1]))
 plt.subplot(2, 2, 4)
 plt.xlabel('Input value')
@@ -139,12 +145,13 @@ plt.ylabel('Membership degree')
 plt.plot(x, op4)
 plt.title('Operación 4')
 
+# Adjust plot layout for good fit and save to file
 plt.tight_layout()
 plt.savefig('operationResults.png')
 #plt.show()
 plt.close()
 
-# Export to csv
+# Export to csv file sets and operations
 setsCSV = np.transpose(np.array([x, S[0], S[1], S[2], S[3], S[4]]))
 operationsCSV = np.transpose(np.array([x, op1, op2, op3, op4]))
 np.savetxt('valuesSets.csv', setsCSV, delimiter=" ", fmt='%1.3f')
