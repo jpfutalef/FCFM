@@ -18,23 +18,18 @@ temp = ctrl.Consequent(np.arange(-200, 201, 1), 'temp')
 
 names = ['nb', 'ns', 'ze', 'ps', 'pb']
 
-error['nb'] = fuzz.trapmf(error.universe, [-1, -1, -0.6, -0.4])
-error['ns'] = fuzz.trapmf(error.universe, [-0.8, -0.7, -0.3, 0])
-error['ze'] = fuzz.trapmf(error.universe, [-0.3, -0.1, 0.1, 0.3])
-error['ps'] = fuzz.trapmf(error.universe, [0.0, 0.3, 0.6, 0.8])
-error['pb'] = fuzz.trapmf(error.universe, [0.7, 0.9, 1, 1])
+error['nb'] = fuzz.zmf(error.universe, -45.0, -35.0)
+error['ns'] = fuzz.trimf(error.universe, [-40.0, .0, 40.0])
+#error['ze'] = fuzz.zmf(error.universe, ,)
 
-delta['nb'] = fuzz.trapmf(delta.universe, [-1, -1, -0.6, -0.4])
-delta['ns'] = fuzz.trapmf(delta.universe, [-0.8, -0.7, -0.3, 0])
-delta['ze'] = fuzz.trapmf(delta.universe, [-0.3, -0.1, 0.1, 0.3])
-delta['ps'] = fuzz.trapmf(delta.universe, [0.0, 0.3, 0.6, 0.8])
-delta['pb'] = fuzz.trapmf(delta.universe, [0.7, 0.9, 1, 1])
+delta['nb'] = fuzz.zmf(delta.universe, [-1, -1, -0.6, -0.4])
+delta['ns'] = fuzz.trimf(delta.universe, [-0.8, -0.7, -0.3, 0])
+delta['ze'] = fuzz.zmf(delta.universe, [-0.3, -0.1, 0.1, 0.3])
 
-temp['nb'] = fuzz.trapmf(temp.universe, [-200, -200, -40, -30])
-temp['ns'] = fuzz.trapmf(temp.universe, [-50, -20, -15, 0])
-temp['ze'] = fuzz.trapmf(temp.universe, [-10, -0, 0, 10])
-temp['ps'] = fuzz.trapmf(temp.universe, [-5, 5, 40, 50])
-temp['pb'] = fuzz.trapmf(temp.universe, [40, 50, 200, 200])
+temp['nb'] = fuzz.zmf(temp.universe, [-200, -200, -40, -30])
+temp['ns'] = fuzz.trimf(temp.universe, [-50, -20, -15, 0])
+temp['ze'] = fuzz.zmf(temp.universe, [-10, -0, 0, 10])
+
 
 # Parte 1
 temp.view()
